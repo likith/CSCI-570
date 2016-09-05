@@ -1,25 +1,5 @@
 #include <iostream>
-
-class Heap
-{
-    int mSize;
-    int mCurrentSize;
-    int* mHeap;
-    int mMinIndex;
-
-public:
-    Heap(int size);
-    ~Heap();
-
-    int insert(int value);
-    void heapifyUp(int index);
-    void heapifyDown(int index);
-    int deleteItem(int index);
-    int findMin();
-    int extractMin();
-    void print();
-
-};
+#include "heap.h"
 
 Heap::Heap(int size){
     mSize = size;
