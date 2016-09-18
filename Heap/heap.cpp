@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "heap.h"
 
 Heap::Heap(int size){
@@ -45,11 +46,12 @@ void Heap::heapifyUp(int index){
 
 void Heap::heapifyDown(int index){
 
-    for(int i = index; 2*i <= mCurrentSize; i = i*2){
+    for(int i = index; 2*i <= mCurrentSize; ){
         int c_index = 2*i;
 
-        if((c_index + 1) <= mSize && mHeap[c_index+1] < mHeap[c_index]){
-            c_index = 2*i+1;
+        if((c_index + 1) <= mCurrentSize && mHeap[c_index+1] < mHeap[c_index]){
+            //c_index = 2*i+1;
+            c_index++;
         }
 
         if(mHeap[c_index] < mHeap[i]){
@@ -60,6 +62,7 @@ void Heap::heapifyDown(int index){
         else{
             break;
         }
+        i = c_index;
     }
 }
 
@@ -99,9 +102,22 @@ int Heap::extractMin(){
 
     mHeap[mMinIndex] = mHeap[mCurrentSize];
     mCurrentSize--;
+    std::cout << "\n Extract Min mCurrentSize " << mCurrentSize << "\n";
     heapifyDown(mMinIndex);
 
     return 0;
+}
+
+void Heap::buildHeap(std::vector<int>& heap_in){
+
+    for(int i = 0; i < mSize; i++){
+        mHeap[i+1] = heap_in[i];
+    }
+    mCurrentSize = mSize;
+
+    for(int i = mSize/2; i > 0; i--){
+        heapifyDown(i);
+    }
 }
 
 void Heap::print(){
@@ -111,6 +127,7 @@ void Heap::print(){
         std::cout << mHeap[i] << "\n";
     }
 }
+
 int main()
 {
     int size;
@@ -119,9 +136,10 @@ int main()
     std::cin >> size;
 
     Heap* h = new Heap(size);
+    bool loop = true;
 
-    while(true){
-        std::cout << "\n1. Insert 2. Find Min 3. Delete 4. Extract Min 5. Print 6. Exit\n";
+    while(loop){
+        std::cout << "\n1. Insert 2. Find Min 3. Delete 4. Extract Min 5. Print 6. Build Heap 7. Exit\n";
         int choice;
         std::cin >> choice;
         switch(choice){
@@ -147,8 +165,18 @@ int main()
             case 5: h->print();
                 break;
 
-            case 6: delete h;
-                return 0;
+            case 6: std::cout << "\n Enter " << size << " elements to the heap \n";
+                {
+                    std::vector<int> heap_in(size);
+                    for(int i = 0; i < size; i++){
+                        std::cin >> heap_in[i];
+                    }
+                    h->buildHeap(heap_in);
+                }
+                break;
+
+            case 7: delete h;
+                loop = false;
                 break;
 
             default: std::cout << "\n Invalid choice. Enter the correct choice.\n";

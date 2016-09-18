@@ -18,6 +18,7 @@ public:
     int deleteItem(int index);
     int findMin();
     int extractMin();
+    void buildHeap(std::vector<int> &);
     void print();
 
 };
