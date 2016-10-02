@@ -2,20 +2,20 @@
 #define HUFFMAN_NODE_H
 
 class HuffmanNode{
-	char c;
-	int f;
-	bool leaf;
-	HuffmanNode* left;
-	HuffmanNode* right;
+    char c;
+    int f;
+    bool leaf;
+    HuffmanNode* left;
+    HuffmanNode* right;
 
 public:
-	HuffmanNode(char, int);
-	HuffmanNode(int, HuffmanNode*, HuffmanNode*);
-	int get_frequency();
-	bool is_leaf();
-	char get_char();
-	HuffmanNode* get_left();
-	HuffmanNode* get_right();
+    HuffmanNode(char, int);
+    HuffmanNode(int, HuffmanNode*, HuffmanNode*);
+    int get_frequency();
+    bool is_leaf();
+    char get_char();
+    HuffmanNode* get_left();
+    HuffmanNode* get_right();
 
 };
 
@@ -28,23 +28,23 @@ HuffmanNode::HuffmanNode(int _f, HuffmanNode* _left, HuffmanNode* _right): f(_f)
 }
 
 int HuffmanNode::get_frequency(){
-	return this->f;
+    return this->f;
 }
 
 bool HuffmanNode::is_leaf(){
-	return this->leaf;
+    return this->leaf;
 }
 
 char HuffmanNode::get_char(){
-	return this->c;
+    return this->c;
 }
 
 HuffmanNode* HuffmanNode::get_left(){
-	return this->left;
+    return this->left;
 }
 
 HuffmanNode* HuffmanNode::get_right(){
-	return this->right;
+    return this->right;
 }
 
 #endif //HUFFMAN_NODE_H
