@@ -42,6 +42,7 @@ void HuffmanCoding::delete_tree(HuffmanNode* hTree){
     delete_tree(hTree->get_left());
     delete_tree(hTree->get_right());
     delete hTree;
+    hTree = nullptr;
 
     return;
 }
