@@ -28,6 +28,24 @@ void HuffmanCoding::print_tree_utility(HuffmanNode* node, std::string bit_string
     return;
 }
 
+void HuffmanCoding::clean_up(){
+
+    delete_tree(hTree);
+}
+
+void HuffmanCoding::delete_tree(HuffmanNode* hTree){
+
+    if(hTree == nullptr){
+        return;
+    }
+
+    delete_tree(hTree->get_left());
+    delete_tree(hTree->get_right());
+    delete hTree;
+
+    return;
+}
+
 HuffmanNode* HuffmanCoding::build_huffman_tree(){
     
     std::priority_queue<HuffmanNode*, std::vector<HuffmanNode*>, cmp > tempQ = pQ;
@@ -113,6 +131,7 @@ int main()
     h.process_input(choice);
     h.build_huffman_tree();
     h.print_tree();
+    h.clean_up();
 
     return 0;
 }

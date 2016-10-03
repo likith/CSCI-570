@@ -22,6 +22,8 @@ public:
     HuffmanNode* build_huffman_tree();
     void print_tree();
     void print_tree_utility(HuffmanNode*, std::string);
+    void clean_up();
+    void delete_tree(HuffmanNode* hTree);
 };
 
 
