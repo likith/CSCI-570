@@ -15,6 +15,7 @@ class HuffmanCoding{
 private:
     std::priority_queue<HuffmanNode*, std::vector<HuffmanNode*>, cmp > pQ;
     HuffmanNode* hTree;
+    std::unordered_map<char, int> char_map;
 
 public:
     int process_input(int c);

@@ -1,6 +1,8 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+#include <unordered_map>
+#include <fstream>
 
 //#include "HuffmanNode.h"
 #include "HuffmanCoding.h"
@@ -50,6 +52,7 @@ HuffmanNode* HuffmanCoding::build_huffman_tree(){
 }
 
 int HuffmanCoding::process_input(int c){
+    
     if(c == 1){
         unsigned n;
         std::cout << "Enter number of characters\n";
@@ -66,6 +69,34 @@ int HuffmanCoding::process_input(int c){
 
             pQ.push(h);
         }
+    }
+    else if(c == 2){
+        std::string file_path;
+        std::cout << "Please enter the file path\n";
+        std::cin >> file_path;
+
+        std::fstream fin(file_path, std::fstream::in);
+        if(!fin){
+            std::cout << "Couldn't open the file\n";
+            return -1;
+        }
+
+        char c;
+
+        while(fin >> std::noskipws >> c){
+            char_map[c]++;
+        }
+
+        std::unordered_map<char, int>::iterator it;
+        for(it = char_map.begin(); it != char_map.end(); it++){
+            
+            HuffmanNode* h = new HuffmanNode(it->first, it->second);
+            pQ.push(h);
+        }
+    }
+    else{
+        std::cout << "Please Enter a Correct Choice\n";
+        return -1;
     }
 
     return 0;
